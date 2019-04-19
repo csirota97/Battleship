@@ -1,14 +1,20 @@
 import networking as net
 import random
 
+# Principles Of Programming Languages - CS314
+# Final Project
+# File: battleship.py
+# Names: Craig Sirota and Dov Kassai
+
 
 #----------------------------------------------------------------------
 #UTILITY
 #----------------------------------------------------------------------
 
+#Ship class - stores name, size, health, and position of individual ships
 class Ship:
     def __init__(self, name, size, startPos, endPos):
-        self.name = name,
+        self.name = name
         self.size = size
         self.pos = [startPos]
         if startPos % 10 == endPos % 10:
@@ -26,6 +32,8 @@ class Ship:
                 startPos+=(k*1)
                 self.pos.append(startPos)
 
+#All strings presented to the user should be stored in this list,
+#   with a comment correlating to the index number
 messages = [
             "Welcome To Battleship",                    #0
             "Would you like to: \n(H)ost\n(J)oin",      #1
@@ -45,8 +53,10 @@ join_request = "JOIN_REQUESTED"
 isHost = -1
 start = -1
 turns = 0
+ships_left = 5
 
 
+#Converts game position on board to index in list - SEE COMMENT BLOCK BELOW
 def boardPosToIndex(pos):
     letter = (ord(pos[0].upper())-65) * 10
     num = int(pos[1:])-1
@@ -56,8 +66,8 @@ def boardPosToIndex(pos):
 #EVERY 10 SPACES IS EQUIVALENT TO ONE ROW ON BOARD
 #INDEX: 00 = A1 : 09 = A10
 #       90 = J1 : 99 = J10
-#INDEX +/- 10 MOVES VERTICALLY
-#INDEX +/- 1 MOVES HORIZONTALLY
+#INDEX +/- 10 MOVES VERTICALLY (+ => right : - => left)
+#INDEX +/- 1 MOVES HORIZONTALLY(+ => down : - => up)
 
 def printBoard(board):
     row = "   +-+-+-+-+-+-+-+-+-+-+"
@@ -75,6 +85,7 @@ def printBoard(board):
     for i in range(len(rows)):
         print(rows[i])
         print(row)
+
 
 sampleBoard = [0,1,2,3,4,5,6,7,8,9,
                0,1,2,3,4,5,6,7,8,9,
