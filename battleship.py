@@ -44,7 +44,10 @@ messages = [
             "You go second",                            #5
             "HIT!",                                     #6
             "MISS!",                                    #7
-            "YOU SUNK MY ",                             #8
+            "YOU SUNK MY {0}",                          #8
+            "Waiting for opponent to place ship",       #9
+            "Enter the starting location of your {0}",  #10
+            "Enter the ending location of your {0}",    #11
             ]
 
 
@@ -53,7 +56,7 @@ join_request = "JOIN_REQUESTED"
 isHost = -1
 start = -1
 turns = 0
-ships_left = 5
+ships_left = 0
 
 
 #Converts game position on board to index in list - SEE COMMENT BLOCK BELOW
@@ -87,17 +90,29 @@ def printBoard(board):
         print(row)
 
 
-sampleBoard = [0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9,
-               0,1,2,3,4,5,6,7,8,9]
+playerBoard = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+               ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
+hitmap = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+          ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+
+ships = []
 #----------------------------------------------------------------------
 #SETUP
 #----------------------------------------------------------------------
@@ -116,9 +131,9 @@ def setup():
 
 def host_setup():
     global isHost
-    isHost = 0
+    isHost = 1
     print(messages[2])
-    msg = net.rec_set_reciever(14)
+    msg = net.rec_set_reciever(32) #
     if msg == join_request:
         final_setup()
 
@@ -126,14 +141,84 @@ def final_setup():
     global start, isHost
     start = random.randint(0,1)
     net.send(str(start))
+    print(net.reciever_ip)
     start = (start+isHost)%2
 
 def join_setup():
     global isHost
-    isHost = 1
+    isHost = 0
     net.set_target(input(messages[3]))
     net.send(join_request)
     start = (int(net.rec(1))+isHost)%2
+
+def new_ship(name, size):
+    printBoard(playerBoard)
+    start = boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size))))
+    while (start > 99 or start < 0):
+        start = boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size))))
+        
+    end = boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size))))
+    while ((int(start/10) != int(end/10) or abs(end-start) != size) and (start% 10 != end%10 or abs(end-start) != size*10) or end > 99 or end < 0):
+        end = input(messages[11].format("{0} - size {1}: ".format(name,size)))
+    ships.append(Ship(name, size, start, end))
+
+
+
+def place_ships():
+    global playerBoard, ships, isHost
+    if isHost:
+        new_ship("Aircraft Carrier", 5)
+        net.send(str(1))
+        
+        print(messages[9])
+        net.rec(1)
+        new_ship("Battleship", 4)
+        net.send(str(1))
+    
+        print(messages[9])
+        net.rec(1)
+        new_ship("Destroyer", 3)
+        net.send(str(1))
+        
+        print(messages[9])
+        net.rec(1)
+        new_ship("Submarine", 3)
+        net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        new_ship("Patrol Boat", 2)
+        net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+
+
+    else:
+        print(messages[9])
+        net.rec(1)
+        new_ship("Aircraft Carrier", 5)
+        net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        new_ship("Battleship", 4)
+        net.send(str(1))
+        
+        print(messages[9])
+        net.rec(1)
+        new_ship("Destroyer", 3)
+        net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        new_ship("Submarine", 3)
+        net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        new_ship("Patrol Boat", 2)
+        net.send(str(1))
 
 #----------------------------------------------------------------------
 #PLAY
@@ -158,6 +243,7 @@ def play():
 
 def main():
     setup()
+    place_ships()
     play()
 
-#main()
+main()

@@ -26,8 +26,9 @@ def rec(bytes_in):
 
 #Waits for incoming message of X length and sets target IP address to sender
 def rec_set_reciever(bytes_in):
+    global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
-    reciever_ip = addr[0]
+    reciever_ip = addr
     return data.decode('utf-8')
 
 #Sends message to target IP address
