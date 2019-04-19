@@ -61,8 +61,8 @@ ships_left = 0
 
 #Converts game position on board to index in list - SEE COMMENT BLOCK BELOW
 def boardPosToIndex(pos):
-    letter = (ord(pos[0].upper())-65) * 10
-    num = int(pos[1:])-1
+    letter = (ord(pos[0].upper())-65)
+    num = (int(pos[1:])-1)*10
     return letter+num
 
 #BOARD IS 100 SPACE 1-D LIST
@@ -152,16 +152,50 @@ def join_setup():
     start = (int(net.rec(1))+isHost)%2
 
 def new_ship(name, size):
+    global playerBoard
     printBoard(playerBoard)
-    start = boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size))))
+    start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
     while (start > 99 or start < 0):
-        start = boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size))))
+        start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
         
-    end = boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size))))
-    while ((int(start/10) != int(end/10) or abs(end-start) != size) and (start% 10 != end%10 or abs(end-start) != size*10) or end > 99 or end < 0):
-        end = input(messages[11].format("{0} - size {1}: ".format(name,size)))
+    end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
+    print (end)
+    while ((int(start/10) != int(end/10) or abs(end-start) != size-1)
+           and (start% 10 != end%10 or abs(end-start) != (size-1)*10)
+           or end > 99 or end < 0):
+        end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
+        print (end)
     ships.append(Ship(name, size, start, end))
 
+    c= ''
+    if name == "Aircraft Carrier":
+        c = 'a'
+    elif name == "Battleship":
+        c='b'
+    elif name == "Destroyer":
+        c='d'
+    elif name == "Crusier":
+        c='c'
+    elif name == "Patrol Boat":
+        c='p'
+    
+    
+    
+    if start % 10 == end % 10:
+        k = 1
+        if start > end:
+            k = -1
+        for i in range (0,size):
+            playerBoard[start]=c
+            start+=(k*10)
+    else:
+        k = 1
+        if start > end:
+            k = -1
+        for i in range (0,size):
+            playerBoard[start]=c
+            start+=(k*1)
+    
 
 
 def place_ships():
