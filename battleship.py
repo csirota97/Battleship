@@ -279,16 +279,22 @@ def play():
             msg = net.rec(2)
             msg = check_player_map(msg)
             net.send(msg)
+            printBoard(hitmap)
+            printBoard(playerBoard)
         player_move = input(messages[12])
         net.send(player_move)
         msg = net.rec(5)
         update_hitmap(msg,player_move)
+        printBoard(hitmap)
+        printBoard(playerBoard)
          
 
         
         msg = net.rec(2)
         msg = check_player_map(msg)
         net.send(msg)
+        printBoard(hitmap)
+        printBoard(playerBoard)
         
 
 
