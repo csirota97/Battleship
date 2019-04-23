@@ -54,7 +54,7 @@ messages = [
             "Waiting for opponent to place ship",       #9
             "Enter the starting location of your {0}",  #10
             "Enter the ending location of your {0}",    #11
-            "Enter location to strike",                 #12
+            "Enter location to strike: ",                 #12
             ]
 
 
@@ -279,12 +279,14 @@ def play():
             msg = net.rec(2)
             msg = check_player_map(msg)
             net.send(msg)
+            print(msg)
             printBoard(hitmap)
             printBoard(playerBoard)
         player_move = input(messages[12])
         net.send(player_move)
         msg = net.rec(5)
         update_hitmap(msg,player_move)
+        print(msg)
         printBoard(hitmap)
         printBoard(playerBoard)
          
@@ -293,6 +295,7 @@ def play():
         msg = net.rec(2)
         msg = check_player_map(msg)
         net.send(msg)
+        print(msg)
         printBoard(hitmap)
         printBoard(playerBoard)
         
