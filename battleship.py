@@ -55,6 +55,7 @@ messages = [
             "Enter the starting location of your {0}",  #10
             "Enter the ending location of your {0}",    #11
             "Enter location to strike: ",                 #12
+            "{0} at {1}",                               #13
             ]
 
 
@@ -277,25 +278,25 @@ def play():
         if start==0 and turns==0:
             turns +=1
             msg = net.rec(2)
-            msg = check_player_map(msg)
-            net.send(msg)
-            print(msg)
+            msg2 = check_player_map(msg)
+            net.send(msg2)
+            print(messages[13].format(msg2, msg))
             printBoard(hitmap)
             printBoard(playerBoard)
         player_move = input(messages[12])
         net.send(player_move)
         msg = net.rec(5)
         update_hitmap(msg,player_move)
-        print(msg)
+        print(messages[13].format(msg, player_move))
         printBoard(hitmap)
         printBoard(playerBoard)
          
 
         
         msg = net.rec(2)
-        msg = check_player_map(msg)
-        net.send(msg)
-        print(msg)
+        msg2 = check_player_map(msg)
+        net.send(msg2)
+        print(messages[13].format(msg2, msg))
         printBoard(hitmap)
         printBoard(playerBoard)
         
