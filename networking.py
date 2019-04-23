@@ -28,12 +28,13 @@ def rec(bytes_in):
 def rec_set_reciever(bytes_in):
     global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
-    reciever_ip = addr
+    reciever_ip = addr[0]
     return data.decode('utf-8')
 
 #Sends message to target IP address
 def send(data):
-    sock.sendto(data.encode('utf-8'),(reciever_ip,port))
+    print(reciever_ip+"")
+    sock.sendto(data.encode('utf-8'), (reciever_ip, port))
 
 #Sends message to local host 127.0.0.1
 def send_local(data):
