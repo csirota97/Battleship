@@ -152,7 +152,7 @@ def final_setup():
     start = (start+isHost)%2
 
 def join_setup():
-    global isHost
+    global isHost, start
     isHost = 0
     net.set_target(input(messages[3]))
     net.send(join_request)
