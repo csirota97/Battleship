@@ -174,7 +174,7 @@ def new_ship(name, size):
         c='b'
     elif name == "Destroyer":
         c='d'
-    elif name == "Crusier":
+    elif name == "Submarine":
         c='c'
     elif name == "Patrol Boat":
         c='p'
