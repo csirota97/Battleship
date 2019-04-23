@@ -7,6 +7,12 @@ import random
 # Names: Craig Sirota and Dov Kassai
 
 
+
+#NOTES
+    # chamge so the input of row and column would be ROW: ___ and COLUMN: ____
+
+
+
 #----------------------------------------------------------------------
 #UTILITY
 #----------------------------------------------------------------------
@@ -48,6 +54,7 @@ messages = [
             "Waiting for opponent to place ship",       #9
             "Enter the starting location of your {0}",  #10
             "Enter the ending location of your {0}",    #11
+            "Enter location to strike",                 #12
             ]
 
 
@@ -267,13 +274,64 @@ def play():
         print(messages[5])
 
     while 1:
-        pass
+        if start==0 and turns==0:
+            turns +=1
+            msg = net.rec(2)
+            msg = check_player_map(msg)
+            net.send(msg)
+        player_move = input(messages[12])
+        net.send(player_move)
+        msg = net.rec(5)
+        update_hitmap(msg,player_move)
+         
+
+        
+        msg = net.rec(2)
+        msg = check_player_map(msg)
+        net.send(msg)
+        
+
+
+            
+def update_hitmap(variable, location):
+    if variable == messages[6]:
+        hitmap[boardPosToIndex(location)] = "X"
+    elif variable==messages[7]:
+        hitmap[boardPosToIndex(location)] = "O"
+
+def check_player_map(location):
+        if " " != playerBoard[boardPosToIndex(location)]:
+            playerBoard[boardPosToIndex(location)]= "X"
+            for i in range(len(ships)):
+                if ships[i].pos[0]%10 == boardPosToIndex(location)% 10 or int(ships[i].pos[0]/10) == int(boardPosToIndex(location)/10):
+                    for j in range(len(ships[i].pos)):
+                        if ships[i].pos[j]==boardPosToIndex(location):
+                            ships[i].pos.remove(j)
+                            if len(ships[i].pos)==0:
+                                ships.remove(ships[i])
+                            return messages[6]
+        else:
+            playerBoard[boardPosToIndex(location)]= "O"
+            return messages[7]
+
+
+
+#----------------------------------------------------------------------
+# this is where the gameplay happens
+# ---------------------------------------------------------------------
+
+# send the location you want to hit 
+# either it is a hit or a miss 
+    # if it is a hit then you update their playermap, update their ships list 
+# then update your hitmap and their playermap a
+#wait for response from other player 
+
+
 
 
 #----------------------------------------------------------------------
 #MAIN
 #----------------------------------------------------------------------
-
 
 def main():
     setup()
