@@ -177,9 +177,9 @@ def new_ship(name, size):
         k = 1
         if start > end:
             k = -1
-            for i in range (1,size):
-                start+=(k*10)
-                oogyboogy.append(start)
+        for i in range (1,size):
+            start+=(k*10)
+            oogyboogy.append(start)
     else:                           #row
         k = 1
         if start > end:
@@ -187,6 +187,8 @@ def new_ship(name, size):
         for i in range (1,size):
             start+=(k*1)
             oogyboogy.append(start)
+
+    print (oogyboogy)
 
     for i in range(len(oogyboogy)):
         if playerBoard[oogyboogy[i]] != ' ':
@@ -206,9 +208,9 @@ def new_ship(name, size):
             k = 1
             if start > end:
                 k = -1
-                for i in range (1,size):
-                    start+=(k*10)
-                    oogyboogy.append(start)
+            for i in range (1,size):
+                start+=(k*10)
+                oogyboogy.append(start)
         else:                           #row
             k = 1
             if start > end:
