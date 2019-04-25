@@ -220,7 +220,7 @@ def new_ship(name, size):
         for i in range(len(oogyboogy)):
             if playerBoard[oogyboogy[i]] != ' ':
                 legalPlacement = 0
-                    break
+                break
 
     ships.append(Ship(name, size, start, end))
 
