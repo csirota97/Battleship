@@ -164,17 +164,64 @@ def new_ship(name, size):
     global playerBoard
     printBoard(playerBoard)
     start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
+    
+    legalPlacement = 1
+    
     while (start > 99 or start < 0):
         start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
         
     end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
+
+    oogyboogy = [start]
+    if start % 10 == end % 10:   #column
+        k = 1
+        if start > end:
+            k = -1
+            for i in range (1,size):
+                start+=(k*10)
+                oogyboogy.append(start)
+    else:                           #row
+        k = 1
+        if start > end:
+            k = -1
+        for i in range (1,size):
+            start+=(k*1)
+            oogyboogy.append(start)
+
+    for i in range(len(oogyboogy)):
+        if playerBoard[oogyboogy[i]] != ' ':
+            legalPlacement = 0
+            break
+
     print (end)
-    while ((int(start/10) != int(end/10) or abs(end-start) != size-1)
+    while ((int(start/10) != int(end/10) or abs(end-start) != size-1 or legalPlacement == 0)
            and (start% 10 != end%10 or abs(end-start) != (size-1)*10)
            or end > 99 or end < 0):
         print (messages[14])
         end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
         print (end)
+
+        oogyboogy = [start]
+        if start % 10 == end % 10:   #column
+            k = 1
+            if start > end:
+                k = -1
+                for i in range (1,size):
+                    start+=(k*10)
+                    oogyboogy.append(start)
+        else:                           #row
+            k = 1
+            if start > end:
+                k = -1
+            for i in range (1,size):
+                start+=(k*1)
+                oogyboogy.append(start)
+
+        for i in range(len(oogyboogy)):
+            if playerBoard[oogyboogy[i]] != ' ':
+                legalPlacement = 0
+                    break
+
     ships.append(Ship(name, size, start, end))
 
     c= ''
