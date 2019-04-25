@@ -54,8 +54,9 @@ messages = [
             "Waiting for opponent to place ship",       #9
             "Enter the starting location of your {0}",  #10
             "Enter the ending location of your {0}",    #11
-            "Enter location to strike: ",                 #12
+            "Enter location to strike: ",               #12
             "{0} at {1}",                               #13
+            "Invalid ship location",                    #14
             ]
 
 
@@ -171,6 +172,7 @@ def new_ship(name, size):
     while ((int(start/10) != int(end/10) or abs(end-start) != size-1)
            and (start% 10 != end%10 or abs(end-start) != (size-1)*10)
            or end > 99 or end < 0):
+        print (messages[14])
         end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
         print (end)
     ships.append(Ship(name, size, start, end))
