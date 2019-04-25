@@ -428,6 +428,6 @@ def main():
         place_ships()
         play()
     except ValueError:
-        print "FUCK OFF DOV"
+        print ("FUCK OFF DOV")
 
 main()
