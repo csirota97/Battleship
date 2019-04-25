@@ -423,8 +423,11 @@ def check_player_map(location):
 #----------------------------------------------------------------------
 
 def main():
-    setup()
-    place_ships()
-    play()
+    try:
+        setup()
+        place_ships()
+        play()
+    except ValueError:
+        print "FUCK OFF DOV"
 
 main()
