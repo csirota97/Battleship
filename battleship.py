@@ -10,6 +10,7 @@ import random
 
 #NOTES
     # chamge so the input of row and column would be ROW: ___ and COLUMN: ____
+#change when user inputs something when it is not their turn 
 
 
 
