@@ -173,51 +173,78 @@ def new_ship(name, size):
     end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
 
     oogyboogy = [start]
-    if start % 10 == end % 10:   #column
+    start2 = start
+    if start2 % 10 == end % 10:   #column
         k = 1
-        if start > end:
+        if start2 > end:
             k = -1
         for i in range (1,size):
-            start+=(k*10)
-            oogyboogy.append(start)
+            start2+=(k*10)
+            oogyboogy.append(start2)
     else:                           #row
         k = 1
-        if start > end:
+        if start2 > end:
             k = -1
         for i in range (1,size):
-            start+=(k*1)
-            oogyboogy.append(start)
+            start2+=(k*1)
+            oogyboogy.append(start2)
 
     print (oogyboogy)
 
     for i in range(len(oogyboogy)):
+        print ('"'+playerBoard[oogyboogy[i]]+'"')
         if playerBoard[oogyboogy[i]] != ' ':
             legalPlacement = 0
             break
 
+    print(size)
+    print (legalPlacement == 0)
+    print (end > 99 or end < 0)
+    print (abs(end - start) != size-1)
     print (end)
-    while ((int(start/10) != int(end/10) or abs(end-start) != size-1 or legalPlacement == 0)
-           and (start% 10 != end%10 or abs(end-start) != (size-1)*10)
-           or end > 99 or end < 0):
+    print (start)
+    print (end - start)
+    print (abs(end-start))
+    print (str(abs(end - start)) + ","+ str(size-1))
+    print (abs(end - start) != (size-1)*10 )
+    print(end > 99 or end < 0)
+        #    while (((int(start/10) != int(end/10) or abs(end-start) != size-1) and (start% 10 != end%10 or abs(end-start) != (size-1)*10))
+        #    or end > 99 or end < 0
+        #   or legalPlacement == 0):
+
+    while (legalPlacement == 0
+           or end > 99 or end < 0
+           or (abs(end - start) != size-1 and abs(end - start) != (size-1)*10 )):
         print (messages[14])
+        
+        if legalPlacement == 0:
+            start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
+
+            legalPlacement = 1
+            
+            while (start > 99 or start < 0):
+                start = int(boardPosToIndex(input(messages[10].format("{0} - size {1}: ".format(name,size)))))
+        
+        
         end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
         print (end)
 
+        start2 = start
         oogyboogy = [start]
-        if start % 10 == end % 10:   #column
+        if start2 % 10 == end % 10:   #column
             k = 1
-            if start > end:
+            if start2 > end:
                 k = -1
             for i in range (1,size):
-                start+=(k*10)
-                oogyboogy.append(start)
+                start2+=(k*10)
+                oogyboogy.append(start2)
         else:                           #row
             k = 1
-            if start > end:
+            if start2 > end:
                 k = -1
             for i in range (1,size):
-                start+=(k*1)
-                oogyboogy.append(start)
+                start2+=(k*1)
+                oogyboogy.append(start2)
 
         for i in range(len(oogyboogy)):
             if playerBoard[oogyboogy[i]] != ' ':
