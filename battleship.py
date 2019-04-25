@@ -70,6 +70,7 @@ ships_left = 0
 
 #Converts game position on board to index in list - SEE COMMENT BLOCK BELOW
 def boardPosToIndex(pos):
+    pos = pos.replace(" ", "")
     letter = (ord(pos[0].upper())-65)
     num = (int(pos[1:])-1)*10
     return letter+num
@@ -388,19 +389,19 @@ def update_hitmap(variable, location):
         hitmap[boardPosToIndex(location)] = "O"
 
 def check_player_map(location):
-        if " " != playerBoard[boardPosToIndex(location)]:
-            playerBoard[boardPosToIndex(location)]= "X"
-            for i in range(len(ships)):
-                if ships[i].pos[0]%10 == boardPosToIndex(location)% 10 or int(ships[i].pos[0]/10) == int(boardPosToIndex(location)/10):
-                    for j in range(len(ships[i].pos)):
-                        if ships[i].pos[j]==boardPosToIndex(location):
-                            ships[i].pos.remove(j)
-                            if len(ships[i].pos)==0:
-                                ships.remove(ships[i])
-                            return messages[6]
-        else:
-            playerBoard[boardPosToIndex(location)]= "O"
-            return messages[7]
+    if " " != playerBoard[boardPosToIndex(location)]:
+        playerBoard[boardPosToIndex(location)]= "X"
+        for i in range(len(ships)):
+            if ships[i].pos[0]%10 == boardPosToIndex(location)% 10 or int(ships[i].pos[0]/10) == int(boardPosToIndex(location)/10):
+                for j in range(len(ships[i].pos)):
+                    if ships[i].pos[j]==boardPosToIndex(location):
+                        ships[i].pos.remove(ships[i].pos[j])
+                        if len(ships[i].pos)==0:
+                            ships.remove(ships[i])
+                        return messages[6]
+    else:
+        playerBoard[boardPosToIndex(location)]= "O"
+        return messages[7]
 
 
 
