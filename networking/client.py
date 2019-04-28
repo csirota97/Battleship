@@ -12,12 +12,12 @@ reciever_ip = ""
 
 port = 15723
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('', port))
 
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((my_ip, port))
+def setup():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(('', port))
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((my_ip, port))
 
 def send(msg):
     s.send(MESSAGE)
