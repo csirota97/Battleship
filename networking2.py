@@ -10,7 +10,7 @@ import socket
 my_ip = socket.gethostbyname(socket.gethostname())
 reciever_ip = ""
 
-port = 15721
+port = 15723
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('', port))
@@ -18,8 +18,7 @@ sock.bind(('', port))
 
 #Sets target IP address for communications
 def set_target (recv_addr):
-    global reciever_ip, sock
-    sock.connect((recv_addr, port))
+    global reciever_ip, 
     reciever_ip = recv_addr
 
 #Waits for incoming message of X length
