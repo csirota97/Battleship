@@ -398,11 +398,12 @@ def play():
     while 1:
         if start==0 and turns==0:
             turns +=1
-            msg = net.rec(3)
             try:
+                msg = net.rec(3)
                 msg2 = check_player_map(msg)
                 net.send(msg2)
             except ValueError:
+                msg = net.rec(3)
                 msg2 = check_player_map(msg)
                 net.send(msg2)
             print(messages[13].format(msg2, msg))
@@ -421,11 +422,12 @@ def play():
          
 
         
-        msg = net.rec(3)
         try:
+            msg = net.rec(3)
             msg2 = check_player_map(msg)
             net.send(msg2)
         except ValueError:
+            msg = net.rec(3)
             msg2 = check_player_map(msg)
             net.send(msg2)
         print(messages[13].format(msg2, msg))
