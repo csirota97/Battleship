@@ -1,4 +1,4 @@
-import networking as net
+from networking import networking as net
 import random
 
 # Principles Of Programming Languages - CS314
@@ -299,42 +299,43 @@ def place_ships():
         
         print(messages[9])
         net.rec(1)
-        try:
-            new_ship("Battleship", 4)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Battleship", 4)
-            net.send(str(1))
-    
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Destroyer", 3)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Destroyer", 3)
-            net.send(str(1))
-        
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Submarine", 3)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Submarine", 3)
-            net.send(str(1))
-
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Patrol Boat", 2)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Patrol Boat", 2)
-            net.send(str(1))
-
-        print(messages[9])
-        net.rec(1)
+#
+#        try:
+#            new_ship("Battleship", 4)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Battleship", 4)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Destroyer", 3)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Destroyer", 3)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Submarine", 3)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Submarine", 3)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Patrol Boat", 2)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Patrol Boat", 2)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)'''
 
 
     else:
@@ -347,41 +348,41 @@ def place_ships():
             new_ship("Aircraft Carrier", 5)
             net.send(str(1))
 
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Battleship", 4)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Battleship", 4)
-            net.send(str(1))
-        
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Destroyer", 3)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Destroyer", 3)
-            net.send(str(1))
-
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Submarine", 3)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Submarine", 3)
-            net.send(str(1))
-
-        print(messages[9])
-        net.rec(1)
-        try:
-            new_ship("Patrol Boat", 2)
-            net.send(str(1))
-        except ValueError:
-            new_ship("Patrol Boat", 2)
-            net.send(str(1))
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Battleship", 4)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Battleship", 4)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Destroyer", 3)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Destroyer", 3)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Submarine", 3)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Submarine", 3)
+#            net.send(str(1))
+#
+#        print(messages[9])
+#        net.rec(1)
+#        try:
+#            new_ship("Patrol Boat", 2)
+#            net.send(str(1))
+#        except ValueError:
+#            new_ship("Patrol Boat", 2)
+#            net.send(str(1))
 #----------------------------------------------------------------------
 #PLAY
 #----------------------------------------------------------------------
@@ -398,11 +399,16 @@ def play():
         if start==0 and turns==0:
             turns +=1
             msg = net.rec(3)
-            msg2 = check_player_map(msg)
-            net.send(msg2)
+            try:
+                msg2 = check_player_map(msg)
+                net.send(msg2)
+            except ValueError:
+                msg2 = check_player_map(msg)
+                net.send(msg2)
             print(messages[13].format(msg2, msg))
             printBoard(hitmap)
             printBoard(playerBoard)
+        
         player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16)
@@ -416,8 +422,12 @@ def play():
 
         
         msg = net.rec(3)
-        msg2 = check_player_map(msg)
-        net.send(msg2)
+        try:
+            msg2 = check_player_map(msg)
+            net.send(msg2)
+        except ValueError:
+            msg2 = check_player_map(msg)
+            net.send(msg2)
         print(messages[13].format(msg2, msg))
         printBoard(hitmap)
         printBoard(playerBoard)
