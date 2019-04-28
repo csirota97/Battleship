@@ -1,4 +1,4 @@
-import networking as net
+import networking2 as net
 import random
 
 # Principles Of Programming Languages - CS314

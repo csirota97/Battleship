@@ -5,20 +5,21 @@ import socket
 # File: networking.py
 # Names: Craig Sirota and Dov Kassai
 
-#UDP Version
+#TCP VERSION
 
 my_ip = socket.gethostbyname(socket.gethostname())
 reciever_ip = ""
 
 port = 15721
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(('', port))
 
 
 #Sets target IP address for communications
 def set_target (recv_addr):
-    global reciever_ip
+    global reciever_ip, sock
+    sock.connect((recv_addr, port))
     reciever_ip = recv_addr
 
 #Waits for incoming message of X length
@@ -28,16 +29,19 @@ def rec(bytes_in):
 
 #Waits for incoming message of X length and sets target IP address to sender
 def rec_set_reciever(bytes_in):
-    global reciever_ip
-    data, addr = sock.recvfrom(bytes_in)
+    global reciever_ip, sock
+    sock.bind((my_ip, port))
+    sock.listen(1)
+    sock, addr = sock.accept()
+    sock.recv(bytes_in)
     reciever_ip = addr[0]
     return data.decode('utf-8')
 
 #Sends message to target IP address
 def send(data):
     print(reciever_ip+"")
-    sock.sendto(data.encode('utf-8'), (reciever_ip, port))
+    sock.send(data.encode('utf-8'))
 
 #Sends message to local host 127.0.0.1
-def send_local(data):
-    sock.sendto(data.encode('utf-8'),('127.0.0.1',port))
+#def send_local(data):
+#    sock.sendto(data.encode('utf-8'),('127.0.0.1',port))
