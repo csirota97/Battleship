@@ -162,7 +162,6 @@ def final_setup():
 def join_setup():
     global isHost, start
     isHost = 0
-    msg = input(messages[3])
     
     from networking import client as net
     net.set_target(input(messages[3]))

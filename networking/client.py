@@ -11,11 +11,10 @@ my_ip = socket.gethostbyname(socket.gethostname())
 reciever_ip = ""
 
 port = 15723
-
+s = ''
 
 def setup():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(('', port))
+    global s
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((my_ip, port))
 
@@ -23,11 +22,10 @@ def send(msg):
     s.send(MESSAGE)
 
 def rec(bytes_in):
-    data = s.recv(BUFFER_SIZE)
+    return s.recv(BUFFER_SIZE)
 
 def set_target(recv_addr):
     global reciever_ip, sock
-    sock.connect((recv_addr, port))
     reciever_ip = recv_addr
 
 
