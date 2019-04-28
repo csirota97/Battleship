@@ -1,4 +1,4 @@
-import networking/networking2 as net2
+from networking import networking2 as net2
 import random
 
 # Principles Of Programming Languages - CS314
@@ -146,7 +146,7 @@ def host_setup():
     isHost = 1
     print(messages[2])
     
-    import networking/server as net
+    from networking import server as net
     
     msg = net.rec(32)
     if msg == join_request:
@@ -163,7 +163,7 @@ def join_setup():
     global isHost, start
     isHost = 0
     
-    import networking/client as net
+    from networking import client as net
     
     net.set_target(input(messages[3]))
     net.send(join_request)
