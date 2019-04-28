@@ -1,4 +1,4 @@
-#import networking2 as net
+import networking/networking2 as net2
 import random
 
 # Principles Of Programming Languages - CS314
@@ -44,7 +44,7 @@ class Ship:
 messages = [
             "Welcome To Battleship",                    #0
             "Would you like to: \n(H)ost\n(J)oin",      #1
-            "Your IP address is " + net.my_ip,          #2
+            "Your IP address is " + net2.my_ip,          #2
             "Please enter the IP address of the " +     #3
             "server you wish to connect with:\n",
             "You go first",                             #4
@@ -146,7 +146,7 @@ def host_setup():
     isHost = 1
     print(messages[2])
     
-    import server as net
+    import networking/server as net
     
     msg = net.rec(32)
     if msg == join_request:
@@ -162,7 +162,9 @@ def final_setup():
 def join_setup():
     global isHost, start
     isHost = 0
-    import client as net
+    
+    import networking/client as net
+    
     net.set_target(input(messages[3]))
     net.send(join_request)
     start = (int(net.rec(1))+isHost)%2
