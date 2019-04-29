@@ -404,11 +404,11 @@ def play():
             turns +=1
             try:
                 msg = net.rec(3)
-                msg2,lcheck = check_player_map(msg)
+                msg2,lcheck,sunk = check_player_map(msg)
                 net.send(msg2)
             except ValueError:
                 msg = net.rec(3)
-                msg2,lcheck = check_player_map(msg)
+                msg2,lcheck,sunk = check_player_map(msg)
                 net.send(msg2)
             
             print(messages[13].format(msg2, msg))
