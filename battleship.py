@@ -299,7 +299,7 @@ def place_ships():
 #        except ValueError:
 #            new_ship("Aircraft Carrier", 5)
 #            net.send(str(1))
-#        
+#
 #        print(messages[9])
 #        net.rec(1)
 #
@@ -418,6 +418,7 @@ def play():
         msg2 = net.rec(len(messages[8])+16)
         if msg2 == messages[16]:
             print(messages[17])
+            return
         msg = net.rec(5)
         update_hitmap(msg,player_move)
         print(messages[13].format(msg, player_move))
@@ -464,8 +465,9 @@ def check_player_map(location):
                             else:
                                 net.send(messages[16])
                         return messages[6]
-                        
+
         net.send(messages[15])
+        return messages[6]
     else:
         playerBoard[boardPosToIndex(location)]= "O"
         net.send(messages[15])
