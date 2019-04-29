@@ -51,7 +51,7 @@ messages = [
             "You go second",                            #5
             "HIT!",                                     #6
             "MISS!",                                    #7
-            "YOU SUNK MY {0}",                          #8
+            "YOU SUNK THE ENEMY'S {0}",                 #8
             "Waiting for opponent to place ship",       #9
             "Enter the starting location of your {0}",  #10
             "Enter the ending location of your {0}",    #11
@@ -460,7 +460,7 @@ def check_player_map(location):
                         if len(ships[i].pos)==0:
                             net.send(messages[8].format(ships[i].name))
                             ships.remove(ships[i])
-                            if len(ships) > 0:
+                            if len(ships) == 0:
                                 net.send(messages[16])
                         else:
                             net.send(messages[15])
