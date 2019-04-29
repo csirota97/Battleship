@@ -62,6 +62,7 @@ messages = [
             "GAME OVER",                                #16
             "YOU WIN",                                  #17
             "YOU LOSE",                                 #18
+            "YOUR {0} WAS SUNK"                         #19
             ]
 
 
@@ -420,7 +421,7 @@ def play():
         
         player_move = input(messages[12])
         net.send(player_move)
-        msg2 = net.rec(len(messages[8])+16)
+        msg2 = net.rec(len(messages[8])+16).upper()
         msg = net.rec(5)
         update_hitmap(msg,player_move)
 
@@ -471,6 +472,7 @@ def check_player_map(location):
                         ships[i].pos.remove(ships[i].pos[j])
                         if len(ships[i].pos)==0:
                             net.send(messages[8].format(ships[i].name))
+                            print (messages[19].format(ships[i].name))
                             ships.remove(ships[i])
                             if len(ships) == 0:
                                 net.send(messages[16])
