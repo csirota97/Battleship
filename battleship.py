@@ -463,7 +463,7 @@ def check_player_map(location):
                             if len(ships) > 0:
                                 net.send(messages[16])
                         else:
-                            net.send(messages[16])
+                            net.send(messages[15])
                         return messages[6]
 
         net.send(messages[15])
