@@ -439,13 +439,15 @@ def play():
         
         try:
             msg = net.rec(3)
-            msg2,lcheck = check_player_map(msg)
+            msg2,lcheck, sunk = check_player_map(msg)
             net.send(msg2)
         except ValueError:
             msg = net.rec(3)
-            msg2,lcheck = check_player_map(msg)
+            msg2,lcheck, sunk = check_player_map(msg)
             net.send(msg2)
         print(messages[13].format(msg2, msg))
+        if sunk:
+            print(messages[19].format(sunk.upper()))
         printBoard(hitmap)
         printBoard(playerBoard)
 
@@ -463,6 +465,7 @@ def update_hitmap(variable, location):
 
 def check_player_map(location):
     lose = 0
+    sunk = ''
     if " " != playerBoard[boardPosToIndex(location)]:
         playerBoard[boardPosToIndex(location)]= "X"
         for i in range(len(ships)):
@@ -471,18 +474,18 @@ def check_player_map(location):
                     if ships[i].pos[j]==boardPosToIndex(location):
                         ships[i].pos.remove(ships[i].pos[j])
                         if len(ships[i].pos)==0:
+                            sunk = ships[i].name
                             net.send(messages[8].format(ships[i].name))
-                            print (messages[19].format(ships[i].name))
                             ships.remove(ships[i])
                             if len(ships) == 0:
                                 net.send(messages[16])
                                 lose = 1
                         else:
                             net.send(messages[15])
-                        return messages[6], lose
+                        return messages[6], lose, sunk
 
         net.send(messages[15])
-        return messages[6], lose
+        return messages[6], lose, sunk
     else:
         playerBoard[boardPosToIndex(location)]= "O"
         net.send(messages[15])
