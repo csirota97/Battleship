@@ -403,38 +403,43 @@ def play():
             turns +=1
             try:
                 msg = net.rec(3)
-                msg2 = check_player_map(msg)
+                msg2,lcheck = check_player_map(msg)
                 net.send(msg2)
             except ValueError:
                 msg = net.rec(3)
-                msg2 = check_player_map(msg)
+                msg2,lcheck = check_player_map(msg)
                 net.send(msg2)
+            
             print(messages[13].format(msg2, msg))
             printBoard(hitmap)
             printBoard(playerBoard)
+                
+            if lcheck == 1:
+                print(messages[18])
+                return
         
         player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16)
         msg = net.rec(5)
         update_hitmap(msg,player_move)
-        if msg == messages[16][0:5]:
-            print(messages[17])
-            return
+
         print(messages[13].format(msg, player_move))
         print(msg2)
         printBoard(hitmap)
         printBoard(playerBoard)
-         
+        if msg == messages[16][0:5]:
+            print(messages[17])
+            return
 
         
         try:
             msg = net.rec(3)
-            msg2 = check_player_map(msg)
+            msg2,lcheck = check_player_map(msg)
             net.send(msg2)
         except ValueError:
             msg = net.rec(3)
-            msg2 = check_player_map(msg)
+            msg2,lcheck = check_player_map(msg)
             net.send(msg2)
         print(messages[13].format(msg2, msg))
         printBoard(hitmap)
@@ -450,6 +455,7 @@ def update_hitmap(variable, location):
         hitmap[boardPosToIndex(location)] = "O"
 
 def check_player_map(location):
+    lose = 0
     if " " != playerBoard[boardPosToIndex(location)]:
         playerBoard[boardPosToIndex(location)]= "X"
         for i in range(len(ships)):
@@ -462,16 +468,17 @@ def check_player_map(location):
                             ships.remove(ships[i])
                             if len(ships) == 0:
                                 net.send(messages[16])
+                                lose = 1
                         else:
                             net.send(messages[15])
-                        return messages[6]
+                        return messages[6], lose
 
         net.send(messages[15])
-        return messages[6]
+        return messages[6], lose
     else:
         playerBoard[boardPosToIndex(location)]= "O"
         net.send(messages[15])
-        return messages[7]
+        return messages[7], lose
 
 
 
