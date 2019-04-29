@@ -416,11 +416,11 @@ def play():
         player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16)
-        if msg2 == messages[16]:
-            print(messages[17])
-            return
         msg = net.rec(5)
         update_hitmap(msg,player_move)
+        if msg == messages[16][0:5]:
+            print(messages[17])
+            return
         print(messages[13].format(msg, player_move))
         print(msg2)
         printBoard(hitmap)
