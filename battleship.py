@@ -414,10 +414,6 @@ def play():
             print(messages[13].format(msg2, msg))
             printBoard(hitmap)
             printBoard(playerBoard)
-                
-            if lcheck == 1:
-                print(messages[18])
-                return
         
         player_move = input(messages[12])
         net.send(player_move)
@@ -489,7 +485,7 @@ def check_player_map(location):
     else:
         playerBoard[boardPosToIndex(location)]= "O"
         net.send(messages[15])
-        return messages[7], lose
+        return messages[7], lose, sunk
 
 
 
