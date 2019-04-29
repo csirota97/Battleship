@@ -426,6 +426,7 @@ def play():
         else:
             print(messages[13].format(msg, player_move))
         print(msg2)
+        update_hitmap(msg,player_move)
         printBoard(hitmap)
         printBoard(playerBoard)
         if msg == messages[16][0:5]:
