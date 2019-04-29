@@ -424,7 +424,10 @@ def play():
         msg = net.rec(5)
         update_hitmap(msg,player_move)
 
-        print(messages[13].format(msg, player_move))
+        if msg == messages[16][0:5]:
+            print(messages[13].format(messages[6], player_move))
+        else:
+            print(messages[13].format(msg, player_move))
         print(msg2)
         printBoard(hitmap)
         printBoard(playerBoard)
@@ -444,7 +447,10 @@ def play():
         print(messages[13].format(msg2, msg))
         printBoard(hitmap)
         printBoard(playerBoard)
-        
+
+        if lcheck == 1:
+            print(messages[18])
+            return
 
 
             
