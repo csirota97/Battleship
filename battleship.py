@@ -461,9 +461,9 @@ def check_player_map(location):
                             net.send(messages[8].format(ships[i].name))
                             ships.remove(ships[i])
                             if len(ships) > 0:
-                                net.send(messages[15])
-                            else:
                                 net.send(messages[16])
+                        else:
+                            net.send(messages[16])
                         return messages[6]
 
         net.send(messages[15])
