@@ -35,7 +35,6 @@ def rec_set_reciever(bytes_in):
 
 #Sends message to target IP address
 def send(data):
-    print(reciever_ip+"")
     sock.sendto(data.encode('utf-8'), (reciever_ip, port))
 
 #Sends message to local host 127.0.0.1
