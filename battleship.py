@@ -424,7 +424,7 @@ def play():
             printBoard(playerBoard)
         
         player_move = input(messages[12])
-        while !check_validity(player_move):
+        while not check_validity(player_move):
             player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16).upper()
