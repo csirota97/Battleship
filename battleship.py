@@ -204,17 +204,17 @@ def new_ship(name, size):
             legalPlacement = 0
             break
 
-    print(size)
-    print (legalPlacement == 0)
-    print (end > 99 or end < 0)
-    print (abs(end - start) != size-1)
-    print (end)
-    print (start)
-    print (end - start)
-    print (abs(end-start))
-    print (str(abs(end - start)) + ","+ str(size-1))
-    print (abs(end - start) != (size-1)*10 )
-    print(end > 99 or end < 0)
+#    print(size)
+#    print (legalPlacement == 0)
+#    print (end > 99 or end < 0)
+#    print (abs(end - start) != size-1)
+#    print (end)
+#    print (start)
+#    print (end - start)
+#    print (abs(end-start))
+#    print (str(abs(end - start)) + ","+ str(size-1))
+#    print (abs(end - start) != (size-1)*10 )
+#    print(end > 99 or end < 0)
         #    while (((int(start/10) != int(end/10) or abs(end-start) != size-1) and (start% 10 != end%10 or abs(end-start) != (size-1)*10))
         #    or end > 99 or end < 0
         #   or legalPlacement == 0):
