@@ -9,7 +9,6 @@ import random
 
 
 #NOTES
-    # chamge so the input of row and column would be ROW: ___ and COLUMN: ____
 #change when user inputs something when it is not their turn 
 
 
@@ -87,6 +86,14 @@ def boardPosToIndex(pos):
 #       90 = J1 : 99 = J10
 #INDEX +/- 10 MOVES VERTICALLY (+ => right : - => left)
 #INDEX +/- 1 MOVES HORIZONTALLY(+ => down : - => up)
+
+
+def check_validity(string):
+    if len(string)==2 or len(string)==3:
+        if string[0].isalpha():
+            if string[1:].isdigit():
+                return 1
+    return 0
 
 def printBoard(board):
     row = "   +-+-+-+-+-+-+-+-+-+-+"
@@ -417,6 +424,8 @@ def play():
             printBoard(playerBoard)
         
         player_move = input(messages[12])
+        while !check_validity(player_move):
+            player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16).upper()
         msg = net.rec(5)
