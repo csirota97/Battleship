@@ -63,6 +63,7 @@ messages = [
             "YOU LOSE",                                 #18
             "YOUR {0} WAS SUNK",                        #19
             "ERROR:\nPLEASE SEND LOCATION AGAIN",       #20
+            "Location already used, please enter new location"  #21
             ]
 
 
@@ -433,7 +434,7 @@ def play():
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16).upper()
         msg = net.rec(5)
-        print(msg,player_move)
+#        print(msg,player_move)
         update_hitmap(msg,player_move)
 
         if msg == messages[16][0:5]:
