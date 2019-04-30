@@ -193,13 +193,14 @@ def new_ship(name, size):
         if start2 > end:
             k = -1
         for i in range (1,size):
+        
             start2+=(k*1)
             oogyboogy.append(start2)
 
-    print (oogyboogy)
+#    print (oogyboogy)
 
     for i in range(len(oogyboogy)):
-        print ('"'+playerBoard[oogyboogy[i]]+'"')
+#        print ('"'+playerBoard[oogyboogy[i]]+'"')
         if playerBoard[oogyboogy[i]] != ' ':
             legalPlacement = 0
             break
