@@ -303,43 +303,43 @@ def new_ship(name, size):
 def place_ships():
     global playerBoard, ships, isHost
     if isHost:
-#        try:
-#            new_ship("Aircraft Carrier", 5)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Aircraft Carrier", 5)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#
-#        try:
-#            new_ship("Battleship", 4)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Battleship", 4)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Destroyer", 3)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Destroyer", 3)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Submarine", 3)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Submarine", 3)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
+        try:
+            new_ship("Aircraft Carrier", 5)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Aircraft Carrier", 5)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+
+        try:
+            new_ship("Battleship", 4)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Battleship", 4)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Destroyer", 3)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Destroyer", 3)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Submarine", 3)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Submarine", 3)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
         try:
             new_ship("Patrol Boat", 2)
             net.send(str(1))
@@ -352,42 +352,42 @@ def place_ships():
 
 
     else:
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Aircraft Carrier", 5)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Aircraft Carrier", 5)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Battleship", 4)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Battleship", 4)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Destroyer", 3)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Destroyer", 3)
-#            net.send(str(1))
-#
-#        print(messages[9])
-#        net.rec(1)
-#        try:
-#            new_ship("Submarine", 3)
-#            net.send(str(1))
-#        except ValueError:
-#            new_ship("Submarine", 3)
-#            net.send(str(1))
-#
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Aircraft Carrier", 5)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Aircraft Carrier", 5)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Battleship", 4)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Battleship", 4)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Destroyer", 3)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Destroyer", 3)
+            net.send(str(1))
+
+        print(messages[9])
+        net.rec(1)
+        try:
+            new_ship("Submarine", 3)
+            net.send(str(1))
+        except ValueError:
+            new_ship("Submarine", 3)
+            net.send(str(1))
+
         print(messages[9])
         net.rec(1)
         try:
@@ -424,6 +424,8 @@ def play():
             printBoard(hitmap)
             printBoard(playerBoard)
         
+        #---------------------------------------------------------
+        
         player_move = input(messages[12])
         while not check_validity(player_move):
             print(messages[20])
@@ -431,6 +433,7 @@ def play():
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16).upper()
         msg = net.rec(5)
+        print(msg,player_move)
         update_hitmap(msg,player_move)
 
         if msg == messages[16][0:5]:
@@ -438,13 +441,14 @@ def play():
         else:
             print(messages[13].format(msg, player_move))
         print(msg2)
-        update_hitmap(msg,player_move)
         printBoard(hitmap)
         printBoard(playerBoard)
         if msg == messages[16][0:5]:
             print(messages[17])
             return
 
+
+        #---------------------------------------------------------
         
         try:
             msg = net.rec(3)
@@ -467,7 +471,7 @@ def play():
 
             
 def update_hitmap(variable, location):
-    if variable == messages[6]:
+    if variable == messages[6] or variable == messages[16][0:5]:
         hitmap[boardPosToIndex(location)] = "X"
     elif variable==messages[7]:
         hitmap[boardPosToIndex(location)] = "O"
