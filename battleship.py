@@ -90,9 +90,14 @@ def boardPosToIndex(pos):
 #INDEX +/- 1 MOVES HORIZONTALLY(+ => down : - => up)
 
 
+def isValidAlpha(str):
+    if "abcdefghijABCDEFGHIJ".contains(str[0]):
+        return 1
+    return 0
+
 def check_validity(string):
     if len(string)==2 or len(string)==3:
-        if string[0].isalpha():
+        if isValidAlpha(string[0]):
             if string[1:].isdigit():
                 if hitmap[boardPosToIndex(string)] == " ":
                     print(hitmap[boardPosToIndex(string)])
