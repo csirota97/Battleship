@@ -95,6 +95,7 @@ def check_validity(string):
         if string[0].isalpha():
             if string[1:].isdigit():
                 if hitmap[boardPosToIndex(string)] == " ":
+                    print(hitmap[boardPosToIndex(string)])
                     return 1
                 else:
                     print(messages[21])
@@ -448,7 +449,8 @@ def play():
             print(messages[13].format(messages[6], player_move))
         else:
             print(messages[13].format(msg, player_move))
-        print(msg2)
+        if msg2 != messages[15]:
+            print(msg2)
         printBoard(hitmap)
         printBoard(playerBoard)
         if msg == messages[16][0:5]:
