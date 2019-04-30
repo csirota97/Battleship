@@ -91,7 +91,7 @@ def boardPosToIndex(pos):
 
 
 def isValidAlpha(str):
-    if "abcdefghijABCDEFGHIJ".contains(str[0]):
+    if "abcdefghijABCDEFGHIJ".__contains__(str[0]):
         return 1
     return 0
 
