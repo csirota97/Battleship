@@ -61,7 +61,8 @@ messages = [
             "GAME OVER",                                #16
             "YOU WIN",                                  #17
             "YOU LOSE",                                 #18
-            "YOUR {0} WAS SUNK"                         #19
+            "YOUR {0} WAS SUNK",                        #19
+            "ERROR:\nPLEASE SEND LOCATION AGAIN",       #20
             ]
 
 
@@ -143,9 +144,9 @@ ships = []
 def setup():
     global isHost
     print (messages[0])
-    isHost = input (messages[1] + '\n')
+    isHost = input (messages[1] + '\n').upper()
     while (isHost != 'H' and isHost != 'J'):
-        isHost = input(messages[1] + '\n')
+        isHost = input(messages[1] + '\n').upper()
 
     if isHost == 'H':
         host_setup()
@@ -425,6 +426,7 @@ def play():
         
         player_move = input(messages[12])
         while not check_validity(player_move):
+            print(messages[20])
             player_move = input(messages[12])
         net.send(player_move)
         msg2 = net.rec(len(messages[8])+16).upper()
