@@ -176,7 +176,7 @@ def host_setup():
         final_setup()
 
 def final_setup():
-#    global start, isHost
+    global start, isHost
     start = random.randint(0,1)
     net.send(str(start))
     print(net.reciever_ip)
