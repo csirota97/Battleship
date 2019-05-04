@@ -29,7 +29,6 @@ def set_target (recv_addr):
     f.write("reciever_ip = '" + recv_addr + "'")
     f.close()
     
-    n.reciever_ip = recv_addr
     reciever_ip = c.reciever_ip
 
 #Waits for incoming message of X length
@@ -53,8 +52,6 @@ def rec_set_reciever(bytes_in):
 #Sends message to target IP address
 def send(data):
     sock.sendto(data.encode('utf-8'), (reciever_ip, port))
-    if data.upper() == "M":
-        sock.sendto(input("TYPE MESSAGE HERE:   ").encode('utf-8'), (reciever_ip,port))
 
 
 #Sends message to local host 127.0.0.1
