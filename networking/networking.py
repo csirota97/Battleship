@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import socket
+from networking import config as c
+import networking2 as n
 
 # Principles Of Programming Languages - CS314
 # Final Project
@@ -10,6 +12,7 @@ import socket
 #UDP Version
 
 my_ip = socket.gethostbyname(socket.gethostname())
+c.reciever_ip = ""
 reciever_ip = ""
 
 port = 15721
@@ -20,8 +23,9 @@ sock.bind(('', port))
 
 #Sets target IP address for communications
 def set_target (recv_addr):
-    global reciever_ip
-    reciever_ip = recv_addr
+    c.reciever_ip = recv_addr
+    n.reciever_ip = recv_addr
+    reciever_ip = c.reciever_ip
 
 #Waits for incoming message of X length
 def rec(bytes_in):
@@ -32,12 +36,17 @@ def rec(bytes_in):
 def rec_set_reciever(bytes_in):
     global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
+    c.reciever_ip = addr[0]
+    n.reciever_ip = addr[0]
     reciever_ip = addr[0]
     return data.decode('utf-8')
 
 #Sends message to target IP address
 def send(data):
     sock.sendto(data.encode('utf-8'), (reciever_ip, port))
+    if data.upper() == "M":
+        sock.sendto(input("TYPE MESSAGE HERE:   ").encode('utf-8'), (reciever_ip,port))
+
 
 #Sends message to local host 127.0.0.1
 def send_local(data):
