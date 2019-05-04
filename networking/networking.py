@@ -26,7 +26,7 @@ def set_target (recv_addr):
     global reciever_ip
 
     f = open("networking/config.py", "a")
-    f.write("reciever_ip = " + recv_addr)
+    f.write("reciever_ip = '" + recv_addr + "'")
     f.close()
     
     n.reciever_ip = recv_addr
