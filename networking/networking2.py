@@ -11,6 +11,7 @@ from networking import config as c
 #UDP Version
 
 my_ip = socket.gethostbyname(socket.gethostname())
+reciever_ip = ""
 
 port = 15722
 
@@ -28,7 +29,7 @@ def rec(bytes_in):
 
 #Sends message to target IP address
 def send(data):
-    sock.sendto(data.encode('utf-8'), (c.reciever_ip, port))
+    sock.sendto(data.encode('utf-8'), (reciever_ip, port))
 
 
 #Sends message to local host 127.0.0.1

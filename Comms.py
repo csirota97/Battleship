@@ -1,7 +1,8 @@
 from networking import networking2 as net
+from networking import config as c
 import time
 
-while net.reciever_ip == "":
+while c.reciever_ip == "":
     print("CONNECTING...")
     time.sleep(2)
 
