@@ -25,7 +25,7 @@ sock.bind(('', port))
 def set_target (recv_addr):
     global reciever_ip
 
-    f = open("networking/config.py", "a")
+    f = open("networking/config.py", "w")
     f.write("reciever_ip = '" + recv_addr + "'")
     f.close()
     
@@ -42,7 +42,7 @@ def rec_set_reciever(bytes_in):
     global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
     
-    f = open("networking/config.py", "a")
+    f = open("networking/config.py", "w")
     f.write("reciever_ip = '" + addr[0] + "'")
     f.close()
     
