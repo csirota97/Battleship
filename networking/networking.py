@@ -43,7 +43,7 @@ def rec_set_reciever(bytes_in):
     data, addr = sock.recvfrom(bytes_in)
     
     f = open("networking/config.py", "a")
-    f.write("reciever_ip = " + addr[0])
+    f.write("reciever_ip = '" + addr[0] + "'")
     f.close()
     
     n.reciever_ip = addr[0]
