@@ -23,6 +23,7 @@ sock.bind(('', port))
 
 #Sets target IP address for communications
 def set_target (recv_addr):
+    global reciever_ip
     c.reciever_ip = recv_addr
     n.reciever_ip = recv_addr
     reciever_ip = c.reciever_ip
