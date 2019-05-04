@@ -2,7 +2,7 @@
 
 import socket
 from networking import config as c
-import networking2 as n
+from networking import networking2 as n
 
 # Principles Of Programming Languages - CS314
 # Final Project
