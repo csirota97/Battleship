@@ -22,9 +22,3 @@ sock.bind(('', port))
 def rec(bytes_in):
     data, addr = sock.recvfrom(bytes_in)
     return addr[0], data.decode('utf-8')
-
-#Sends message to target IP address
-def send(data):
-    sock.sendto(data.encode('utf-8'), (reciever_ip, port-1))
-    sock.sendto(data.encode('utf-8'),('127.0.0.1',port-1))
-

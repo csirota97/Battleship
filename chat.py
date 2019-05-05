@@ -9,7 +9,7 @@ while 1:
     f = open("networking/config.py", "r")
     m = f.read()
     print(m)
-    if f.read():
+    if not m == "":
         net.reciever_ip = m
         break
 
