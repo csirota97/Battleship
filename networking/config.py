@@ -1,2 +1,0 @@
-
-reciever_ip = ""
