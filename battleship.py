@@ -264,7 +264,7 @@ def new_ship(name, size):
         
         
         end = int(boardPosToIndex(input(messages[11].format("{0} - size {1}: ".format(name,size)))))
-        print (end)
+#print (end)
 
         start2 = start
         oogyboogy = [start]
