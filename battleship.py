@@ -550,4 +550,9 @@ def main():
     place_ships()
     play()
 
+    
+    f = open("networking/config.py", "w")
+    f.write("" )
+    f.close()
+
 main()
