@@ -13,9 +13,6 @@ while 1:
         net.reciever_ip = m
         break
 
-
-from networking import config as c
-
 print ("\n\nCONNECTED\n\n")
 
 msg = input (":>")

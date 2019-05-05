@@ -15,8 +15,6 @@ while 1:
         break
 
 
-from networking import config as c
-
 print ("\n\nCONNECTED\n\n")
 
 msg, addr = net.rec(1024)
