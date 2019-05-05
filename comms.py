@@ -33,7 +33,7 @@ while not msg.upper() == "QUIT":
     if addr == "127.0.0.1":
         addr = "You"
     else:
-        addr = "Enemy"
+        addr = "Opponent"
     print (addr + ": " + msg)
 
 print("QUIT")
