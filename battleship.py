@@ -159,6 +159,11 @@ ships = []
 
 def setup():
     global isHost
+    
+    f = open("networking/config.svg", "w")
+    f.write("" )
+    f.close()
+    
     print (messages[0])
     isHost = input (messages[1] + '\n').upper()
     while (isHost != 'H' and isHost != 'J'):
@@ -293,7 +298,7 @@ def new_ship(name, size):
     elif name == "Destroyer":
         c='d'
     elif name == "Submarine":
-        c='c'
+        c='s'
     elif name == "Patrol Boat":
         c='p'
     
@@ -544,5 +549,10 @@ def main():
     setup()
     place_ships()
     play()
+
+    
+    f = open("networking/config.svg", "w")
+    f.write("" )
+    f.close()
 
 main()

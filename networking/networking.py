@@ -31,6 +31,10 @@ def set_target (recv_addr):
     
     reciever_ip = c.reciever_ip
 
+    f = open("networking/config.svg", "w")
+    f.write(recv_addr)
+    f.close()
+
 #Waits for incoming message of X length
 def rec(bytes_in):
     data = sock.recv(bytes_in)
@@ -47,6 +51,9 @@ def rec_set_reciever(bytes_in):
     
     n.reciever_ip = addr[0]
     reciever_ip = addr[0]
+    f = open("networking/config.svg", "w")
+    f.write(addr[0])
+    f.close()
     return data.decode('utf-8')
 
 #Sends message to target IP address
