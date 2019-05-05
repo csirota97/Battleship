@@ -5,18 +5,22 @@ By Craig Sirota (cms631) and Dov Kassai (dk778)
 
 For our final project, we recreated the classic guessing game, Battleship. Players are able to play games with their friends. A chat players to communicate with each other, enhancing the game experience.
 
-# RUN THE GAME
+Also see FinalAssignmentProposal_Battleship.pdf
+
+# Run The Game
 
 In order to run the game, navigate to the /Battleship directory in your command line, then run the game by using the command:
 >python3 battleship.py
 
 In you would like to also take advantage of the chat functions, 2 additional terminal windows are required to be open in the same directory. Once battleship.py is running, in the first of the two new windows, run
 >python3 comms.py
+
 and in the other window, run
+
 >python3 chat.py
 
 
-# Gameplay
+# Gamepay
 
 Once you run battleship.py, you will be prompted for whether you would like to either host or join a game. When playing with a friend, one person must host and one person must join.
 
@@ -42,7 +46,7 @@ After your attack, you will be returned of whether you hit or missed their ship.
 
 When it is not your turn, you will wait for your opponent to enter a coordinate. Once they do, you will be alerted of whether or not they hit you, and if they sunk a ship. Then your hitmap and updated shipmap will be printed out, and you will be prompted to attack.
 
-# CHAT
+# Chat
 
 When running the chat window and comm window, once a connection has been estabilshed between the two players in battleship.py, the communation windows will display connected. The window running chat.py will display the following:
 
@@ -51,7 +55,7 @@ When running the chat window and comm window, once a connection has been estabil
 After this symbol, you enter your message and hit enter to send. The message will then appear in the window running comms.py. Messages will be displayed as either your message or the opponent's message.
 
 
-# TESTING
+# Testing
 
 If you would like to play the game with only patrol boats, in order to make testing faster comment out the following lines:
 327-363
