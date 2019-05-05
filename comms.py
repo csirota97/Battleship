@@ -23,7 +23,7 @@ print (addr + ":\t" + msg)
 while not msg.upper() == "QUIT":
     addr, msg= net.rec(1024)
 
-    if addr = "127.0.0.1":
+    if addr == "127.0.0.1":
         addr = "You"
     else:
         addr = "Enemy"
