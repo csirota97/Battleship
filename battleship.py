@@ -161,7 +161,7 @@ def setup():
     global isHost
     
     f = open("networking/config.py", "w")
-    f.write("reciever_ip = \"\"" )
+    f.write("" )
     f.close()
     
     print (messages[0])
