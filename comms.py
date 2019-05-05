@@ -17,10 +17,13 @@ while 1:
 
 print ("\n\nCONNECTED\n\n")
 
-msg, addr = net.rec(1024)
+addr, msg  = net.rec(1024)
 
-print (addr + ":\t" + msg)
-
+print (addr + ": " + msg)
+if addr == "127.0.0.1":
+    addr = "You"
+else:
+    addr = "Enemy"
 while not msg.upper() == "QUIT":
     addr, msg= net.rec(1024)
 
