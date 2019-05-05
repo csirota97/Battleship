@@ -159,6 +159,11 @@ ships = []
 
 def setup():
     global isHost
+    
+    f = open("networking/config.py", "w")
+    f.write("reciever_ip = \"\"" )
+    f.close()
+    
     print (messages[0])
     isHost = input (messages[1] + '\n').upper()
     while (isHost != 'H' and isHost != 'J'):

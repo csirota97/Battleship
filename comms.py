@@ -21,6 +21,10 @@ msg, addr = net.rec(1024)
 print (addr + ":\t" + msg)
 
 while not msg.upper() == "QUIT":
-    msg, addr = net.rec(1024)
+    addr, msg= net.rec(1024)
 
-    print (addr + ":\t" + msg)
+    if addr = "127.0.0.1":
+        addr = "You"
+    else:
+        addr = "Enemy"
+    print (addr + ": " + msg)
