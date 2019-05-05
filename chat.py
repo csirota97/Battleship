@@ -6,7 +6,7 @@ import time
 while 1:
     print ("CONNECTING...")
     time.sleep(2)
-    f = open("networking/config.py", "r")
+    f = open("networking/config.svg", "r")
     m = f.read()
     print(m)
     if not m == "":

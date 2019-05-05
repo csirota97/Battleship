@@ -160,7 +160,7 @@ ships = []
 def setup():
     global isHost
     
-    f = open("networking/config.py", "w")
+    f = open("networking/config.svg", "w")
     f.write("" )
     f.close()
     
@@ -551,7 +551,7 @@ def main():
     play()
 
     
-    f = open("networking/config.py", "w")
+    f = open("networking/config.svg", "w")
     f.write("" )
     f.close()
 

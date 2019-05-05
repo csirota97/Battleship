@@ -23,7 +23,7 @@ def set_target (recv_addr):
     global reciever_ip
     reciever_ip = recv_addr
 
-    f = open("networking/config.py", "w")
+    f = open("networking/config.svg", "w")
     f.write(recv_addr)
     f.close()
 
@@ -37,7 +37,7 @@ def rec_set_reciever(bytes_in):
     global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
     reciever_ip = addr[0]
-    f = open("networking/config.py", "w")
+    f = open("networking/config.svg", "w")
     f.write(addr[0])
     f.close()
     return data.decode('utf-8')
