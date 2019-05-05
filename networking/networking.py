@@ -23,6 +23,10 @@ def set_target (recv_addr):
     global reciever_ip
     reciever_ip = recv_addr
 
+    f = open("config.py", "w")
+    f.write("reciever_ip = \"" + recv_addr + "\"" )
+    f.close()
+
 #Waits for incoming message of X length
 def rec(bytes_in):
     data = sock.recv(bytes_in)
@@ -33,6 +37,9 @@ def rec_set_reciever(bytes_in):
     global reciever_ip
     data, addr = sock.recvfrom(bytes_in)
     reciever_ip = addr[0]
+    f = open("config.py", "w")
+    f.write("reciever_ip = \"" + addr[0] + "\"" )
+    f.close()
     return data.decode('utf-8')
 
 #Sends message to target IP address
