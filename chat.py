@@ -6,9 +6,11 @@ import time
 while 1:
     print ("CONNECTING...")
     time.sleep(2)
-    from networking import config as c
-    print (c.reciever_ip)
-    if c.reciever_ip:
+    f = open("networking/config.py", "r")
+    m = f.read()
+    print(m)
+    if f.read():
+        net.reciever_ip = m
         break
 
 

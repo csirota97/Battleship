@@ -21,4 +21,4 @@ sock.bind(('', port))
 def send(data):
     from networking import config as c
     sock.sendto(data.encode('utf-8'),('127.0.0.1',port+1))
-    sock.sendto(data.encode('utf-8'), (c.reciever_ip, port+1))
+    sock.sendto(data.encode('utf-8'), (reciever_ip, port+1))

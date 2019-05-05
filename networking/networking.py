@@ -24,7 +24,7 @@ def set_target (recv_addr):
     reciever_ip = recv_addr
 
     f = open("networking/config.py", "w")
-    f.write("reciever_ip = \"" + recv_addr + "\"" )
+    f.write(recv_addr)
     f.close()
 
 #Waits for incoming message of X length
@@ -38,7 +38,7 @@ def rec_set_reciever(bytes_in):
     data, addr = sock.recvfrom(bytes_in)
     reciever_ip = addr[0]
     f = open("networking/config.py", "w")
-    f.write("reciever_ip = \"" + addr[0] + "\"" )
+    f.write(addr[0])
     f.close()
     return data.decode('utf-8')
 
