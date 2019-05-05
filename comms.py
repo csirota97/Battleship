@@ -27,7 +27,7 @@ else:
 print (addr + ": " + msg)
 
 
-while not msg.upper() == "QUIT" and addr == "127.0.0.1":
+while not msg.upper() == "QUIT":
     addr, msg= net.rec(1024)
 
     if addr == "127.0.0.1":
