@@ -22,7 +22,7 @@ addr, msg  = net.rec(1024)
 if addr == "127.0.0.1":
     addr = "You"
 else:
-    addr = "Enemy"
+    addr = "Opponent"
 
 print (addr + ": " + msg)
 
@@ -35,3 +35,5 @@ while not msg.upper() == "QUIT":
     else:
         addr = "Enemy"
     print (addr + ": " + msg)
+
+print("QUIT")
