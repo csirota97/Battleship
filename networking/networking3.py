@@ -28,6 +28,3 @@ def send(data):
     sock.sendto(data.encode('utf-8'), (reciever_ip, port-1))
     sock.sendto(data.encode('utf-8'),('127.0.0.1',port-1))
 
-#Sends message to local host 127.0.0.1
-def send_local(data):
-

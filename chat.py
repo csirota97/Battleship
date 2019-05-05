@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from networking import networking3 as net
+from networking import networking2 as net
 import time
 
 while 1:
